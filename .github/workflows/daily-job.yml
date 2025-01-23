@@ -24,4 +24,10 @@ jobs:
         pip install git+https://github.com/flair-systems/flair-api-client-py.git
 
     - name: Run AutoFlair script
+      env:
+        ICAL_URL: ${{ secrets.ICAL_URL || '' }}
+        FLAIR_CLIENT_ID: ${{ secrets.FLAIR_CLIENT_ID }}
+        FLAIR_CLIENT_SECRET: ${{ secrets.FLAIR_CLIENT_SECRET }}
+        AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }}
+        OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}
       run: python AutoFlair.py
