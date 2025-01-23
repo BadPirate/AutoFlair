@@ -3,6 +3,7 @@ name: Run AutoFlair daily
 on:
   schedule:
     - cron: '0 18 * * *' # 11 AM Pacific Time (18:00 UTC)
+  workflow_dispatch:
 
 jobs:
   run-autoflair:
