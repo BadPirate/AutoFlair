@@ -7,5 +7,6 @@ dependencies:
   - icalendar
   - pyyaml
   - pip
+  - python-dotenv
   - pip:
       - git+https://github.com/flair-systems/flair-api-client-py.git

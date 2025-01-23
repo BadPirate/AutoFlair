@@ -4,6 +4,9 @@ import icalendar
 import yaml
 from datetime import datetime, date, timedelta
 from flair_api import make_client
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def is_occupied(target_date, ical_url):
     """
