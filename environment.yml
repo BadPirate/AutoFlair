@@ -1,0 +1,11 @@
+name: calendar_heating
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - requests
+  - icalendar
+  - pyyaml
+  - pip
+  - pip:
+      - git+https://github.com/flair-systems/flair-api-client-py.git
