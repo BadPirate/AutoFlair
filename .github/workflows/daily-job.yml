@@ -33,9 +33,9 @@ jobs:
 
     - name: Run AutoFlair script
       env:
-        ICAL_URL: ${{ secrets.ICAL_URL || '' }}
-        FLAIR_CLIENT_ID: ${{ secrets.FLAIR_CLIENT_ID }}
-        FLAIR_CLIENT_SECRET: ${{ secrets.FLAIR_CLIENT_SECRET }}
-        AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }}
-        OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}
+        ICAL_URL: ${{ secrets.ICAL_URL || '' }} # AirBNB Calendar URL
+        FLAIR_CLIENT_ID: ${{ secrets.FLAIR_CLIENT_ID }} # oauth v1 client
+        FLAIR_CLIENT_SECRET: ${{ secrets.FLAIR_CLIENT_SECRET }} # oauth v1 secret
+        AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }} # Optional, default 10C (50F)
+        OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}  # Optional, default 18.34C (65F)
       run: python AutoFlair.py
