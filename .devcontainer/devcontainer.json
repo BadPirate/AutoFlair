@@ -1,0 +1,17 @@
+{
+    "name": "AutoFlair Dev Container",
+    "image": "continuumio/miniconda3",
+    "postCreateCommand": "conda env create -f environment.yml && echo 'source activate calendar_heating' >> ~/.bashrc",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/envs/calendar_heating/bin/python",
+                "python.pythonPath": "/opt/conda/envs/calendar_heating/bin/python",
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    }
+}

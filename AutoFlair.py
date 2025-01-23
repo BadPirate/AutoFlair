@@ -3,7 +3,7 @@ import requests
 import icalendar
 import yaml
 from datetime import datetime, date, timedelta
-from flair_api import make_client, Resource
+from flair_api import make_client
 
 def is_occupied(target_date, ical_url):
     """
@@ -63,12 +63,7 @@ def set_rooms(flair_client, temp_c, occupied):
             print(f"Updated room {room.attributes['name']} to {'occupied' if occupied else 'unoccupied'} with set point {temp_c}°C until {formatted_date}")
 
 if __name__ == "__main__":
-    # Load the configuration file
-    with open('config.yml', 'r') as file:
-        config = yaml.safe_load(file)
-
-    # Get the iCal URL from the configuration file
-    ical_url = os.getenv("ICAL_URL", config.get("ical_url"))
+    ical_url = os.getenv("ICAL_URL")
 
     if not ical_url:
         raise SystemExit("Fatal Error: Calendar URL is not set in config.yml.")
