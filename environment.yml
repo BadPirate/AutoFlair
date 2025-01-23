@@ -1,12 +1,13 @@
 name: calendar_heating
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - python=3.10
   - requests
   - icalendar
   - pyyaml
-  - pip
   - python-dotenv
+  - pip
   - pip:
       - git+https://github.com/flair-systems/flair-api-client-py.git
