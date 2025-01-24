@@ -28,7 +28,7 @@ jobs:
         python-version: '3.10'
         environment-file: environment.yml
         activate-environment: calendar_heating
-        use-mamba: true  # Optional: Faster dependency resolution
+        use-mamba: true
 
     - name: Verify Environment
       run: |
@@ -43,6 +43,6 @@ jobs:
         AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }} # Optional, default 10C (50F)
         OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}  # Optional, default 18.34C (65F)
       run: |
-        conda init
+        conda init bash
         conda activate calendar_heating
         python AutoFlair.py
