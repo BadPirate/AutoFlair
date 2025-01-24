@@ -87,6 +87,11 @@ if __name__ == "__main__":
     today = date.today()
     try:
         occupied = is_occupied(today, ical_url)
+    except Exception as e:
+        print("AirBNB Error: ", e)
+        raise SystemExit(f"AirBNB Error: {e}")
+    
+    try:
         if occupied:
             print("The calendar shows occupied for today.")
             set_rooms(flair_client, occupied_temp_c, True)
@@ -94,4 +99,5 @@ if __name__ == "__main__":
             print("The calendar does not show occupied for today.")
             set_rooms(flair_client, away_temp_c, False)
     except Exception as e:
-        raise SystemExit(f"Error: {e}")
+        print("Flair Error: ", e)
+        raise SystemExit(f"Flair Error: {e}")
