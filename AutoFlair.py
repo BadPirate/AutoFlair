@@ -94,4 +94,4 @@ if __name__ == "__main__":
             print("The calendar does not show occupied for today.")
             set_rooms(flair_client, away_temp_c, False)
     except Exception as e:
-        print(f"Error: {e}")
+        raise SystemExit(f"Error: {e}")
