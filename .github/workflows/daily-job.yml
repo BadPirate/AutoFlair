@@ -38,4 +38,6 @@ jobs:
         FLAIR_CLIENT_SECRET: ${{ secrets.FLAIR_CLIENT_SECRET }} # oauth v1 secret
         AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }} # Optional, default 10C (50F)
         OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}  # Optional, default 18.34C (65F)
-      run: python AutoFlair.py
+      run: |
+        source ~/miniconda3/bin/activate calendar_heating
+        python AutoFlair.py
