@@ -43,5 +43,6 @@ jobs:
         AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }} # Optional, default 10C (50F)
         OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}  # Optional, default 18.34C (65F)
       run: |
+        conda init
         conda activate calendar_heating
         python AutoFlair.py
