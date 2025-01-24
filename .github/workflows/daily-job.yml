@@ -29,20 +29,7 @@ jobs:
         environment-file: environment.yml
         activate-environment: calendar_heating
         conda-options: "--cache-dir ~/conda_pkgs_dir"
-        use-mamba: true  # Optional: Faster environment resolution
-
-    - name: Cache pip dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Install additional pip dependencies (if needed)
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        use-mamba: true  # Optional: Faster dependency resolution
 
     - name: Run AutoFlair script
       env:
