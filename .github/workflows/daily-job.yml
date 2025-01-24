@@ -28,8 +28,12 @@ jobs:
         python-version: '3.10'
         environment-file: environment.yml
         activate-environment: calendar_heating
-        conda-options: "--cache-dir ~/conda_pkgs_dir"
         use-mamba: true  # Optional: Faster dependency resolution
+
+    - name: Verify Environment
+      run: |
+        conda list
+        python --version
 
     - name: Run AutoFlair script
       env:
