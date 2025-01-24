@@ -2,7 +2,7 @@ name: calendar_heating
 channels:
   - conda-forge
 dependencies:
-  - python="3.10"
+  - python=3.10
   - requests
   - icalendar
   - pyyaml
