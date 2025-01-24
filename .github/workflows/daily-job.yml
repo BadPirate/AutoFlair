@@ -44,5 +44,6 @@ jobs:
         OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}  # Optional, default 18.34C (65F)
       run: |
         conda init bash
+        source ~/.bashrc  # Reload the shell configuration
         conda activate calendar_heating
         python AutoFlair.py
