@@ -73,16 +73,22 @@ if __name__ == "__main__":
     
     flair_client_id = os.getenv("FLAIR_CLIENT_ID")
     flair_client_secret = os.getenv("FLAIR_CLIENT_SECRET")
+
+    print(f"Flair Client ID: {flair_client_id} / Secret: {flair_client_secret}")
+    
     # True if there is any value for FLAIR_CLIENT_USE_OAUTH_2, False otherwise
     flair_client_use_oauth_2 = bool(os.getenv("FLAIR_CLIENT_USE_OAUTH_2"))
 
+    if flair_client_use_oauth_2:
+        print("Using OAuth 2 for Flair API.")
+        
     if not flair_client_id or not flair_client_secret:
         raise SystemExit("Fatal Error: Flair API credentials not set in environment variables, FLAIR_CLIENT_ID and FLAIR_CLIENT_SECRET.")
 
     flair_client = make_client(flair_client_id, flair_client_secret, 'https://api.flair.co/', use_oauth_2=flair_client_use_oauth_2)
 
-    away_temp_c = os.getenv("AWAY_TEMP_C", "10")
-    occupied_temp_c = os.getenv("OCCUPIED_TEMP_C", "18.34")
+    away_temp_c = float(os.getenv("AWAY_TEMP_C", 10))
+    occupied_temp_c = float(os.getenv("OCCUPIED_TEMP_C", 18.34))
 
     # # Check if today is occupied
 
@@ -101,5 +107,5 @@ if __name__ == "__main__":
             print("The calendar does not show occupied for today.")
             set_rooms(flair_client, away_temp_c, False)
     except Exception as e:
-        print("Flair Error: ", e)
+        print("Flair Error: ", e, e.json)
         raise SystemExit(f"Flair Error: {e}")
