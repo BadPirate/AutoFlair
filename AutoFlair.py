@@ -87,8 +87,8 @@ if __name__ == "__main__":
 
     flair_client = make_client(flair_client_id, flair_client_secret, 'https://api.flair.co/', use_oauth_2=flair_client_use_oauth_2)
 
-    away_temp_c = float(os.getenv("AWAY_TEMP_C", 10))
-    occupied_temp_c = float(os.getenv("OCCUPIED_TEMP_C", 18.34))
+    away_temp_c = float(os.getenv("AWAY_TEMP_C") or 10)
+    occupied_temp_c = float(os.getenv("OCCUPIED_TEMP_C") or 18.34)
 
     # # Check if today is occupied
 
