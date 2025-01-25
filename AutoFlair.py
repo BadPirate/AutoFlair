@@ -73,11 +73,13 @@ if __name__ == "__main__":
     
     flair_client_id = os.getenv("FLAIR_CLIENT_ID")
     flair_client_secret = os.getenv("FLAIR_CLIENT_SECRET")
+    # True if there is any value for FLAIR_CLIENT_USE_OAUTH_2, False otherwise
+    flair_client_use_oauth_2 = bool(os.getenv("FLAIR_CLIENT_USE_OAUTH_2"))
 
     if not flair_client_id or not flair_client_secret:
         raise SystemExit("Fatal Error: Flair API credentials not set in environment variables, FLAIR_CLIENT_ID and FLAIR_CLIENT_SECRET.")
 
-    flair_client = make_client(flair_client_id, flair_client_secret, 'https://api.flair.co/')
+    flair_client = make_client(flair_client_id, flair_client_secret, 'https://api.flair.co/', use_oauth_2=flair_client_use_oauth_2)
 
     away_temp_c = os.getenv("AWAY_TEMP_C", "10")
     occupied_temp_c = os.getenv("OCCUPIED_TEMP_C", "18.34")

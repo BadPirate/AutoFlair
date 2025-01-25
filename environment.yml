@@ -9,4 +9,4 @@ dependencies:
   - python-dotenv
   - pip
   - pip:
-      - git+https://github.com/flair-systems/flair-api-client-py.git
+      - git+https://github.com/BadPirate/flair-api-client-py.git
