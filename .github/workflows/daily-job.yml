@@ -41,7 +41,7 @@ jobs:
 
     - name: Check Secrets and Run AutoFlair Script
       env:
-        ICAL_URL: ${{ secrets[format('ICAL_URL_{0}', matrix.n)] || '' }}
+        ICAL_URL: ${{ secrets[format('ICAL_URL_{0}', matrix.n)] || secrets.ICAL_URL || '' }}
         FLAIR_CLIENT_ID: ${{ secrets[format('FLAIR_CLIENT_ID_{0}', matrix.n)] || secrets.FLAIR_CLIENT_ID || '' }}
         FLAIR_CLIENT_SECRET: ${{ secrets[format('FLAIR_CLIENT_SECRET_{0}', matrix.n)] || secrets.FLAIR_CLIENT_SECRET || '' }}
         AWAY_TEMP_C: ${{ secrets[format('AWAY_TEMP_C_{0}', matrix.n)] || secrets.AWAY_TEMP_C || '' }}

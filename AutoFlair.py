@@ -53,10 +53,12 @@ def is_occupied(target_date, ical_url):
     return False
 
 def set_rooms(flair_client, temp_c, occupied):
+    print("Getting structure details")
     structures = flair_client.get('structures')
     until = datetime.utcnow() + timedelta(days=2)
     formatted_date = until.isoformat() + "+00:00"
 
+    print(f"Setting rooms to {'occupied' if occupied else 'unoccupied'} with set point {temp_c}°C.")
     for structure in structures:
         print(f'Structure: {structure.attributes["name"]}')
         rooms = structure.get_rel("rooms")
