@@ -46,6 +46,7 @@ jobs:
         FLAIR_CLIENT_SECRET: ${{ secrets[format('FLAIR_CLIENT_SECRET_{0}', matrix.n)] || secrets.FLAIR_CLIENT_SECRET || '' }}
         AWAY_TEMP_C: ${{ secrets[format('AWAY_TEMP_C_{0}', matrix.n)] || secrets.AWAY_TEMP_C || '' }}
         OCCUPIED_TEMP_C: ${{ secrets[format('OCCUPIED_TEMP_C_{0}', matrix.n)] || secrets.OCCUPIED_TEMP_C || '' }}
+        FLAIR_CLIENT_USE_OAUTH_2: ${{ secrets[format('FLAIR_CLIENT_USE_OAUTH_2_{0}', matrix.n)] || secrets.FLAIR_CLIENT_USE_OAUTH_2 || '' }}
       run: |
         if [[ -z "$ICAL_URL" ]]; then
           echo "ICAL_URL is not set for group ${{ matrix.n }}, skipping..."
