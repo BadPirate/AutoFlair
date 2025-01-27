@@ -1,7 +1,3 @@
-# AutoFlair
-
-AutoFlair is a Python script that automates the process of setting room temperatures based on an Airbnb calendar. 
-It uses the Flair API to update room temperatures based on occupancy.
 
 ## Script Description
 
@@ -11,7 +7,6 @@ The `AutoFlair.py` script performs the following tasks:
 3. Uses the Flair API to set room temperatures based on occupancy.
 
 ## GitHub Actions Workflow
-
 The GitHub Actions workflow defined in `.github/workflows/daily-job.yml` runs the `AutoFlair.py` script daily at 
 18:00 UTC. It performs the following steps:
 
@@ -39,10 +34,10 @@ To set up the project for local development, follow these steps:
     - Reopen the project in the container.
 
 3. **Create the Conda environment:**
-    The environment will be created automatically when the container is built, as specified in [devcontainer.json](http://_vscodecontentref_/4).
+    The environment will be created automatically when the container is built, as specified in `devcontainer.json`.
 
 4. **Set environment variables:**
-    - Create a [.env](http://_vscodecontentref_/5) file in the project root with the following content:
+    - Create a [.env](http://_vscodecontentref_/3) file in the project root with the following content:
     ```env
     FLAIR_CLIENT_ID=your_flair_client_id
     FLAIR_CLIENT_SECRET=your_flair_client_secret
@@ -62,15 +57,17 @@ To use the script, follow these steps:
 2. **Update GitHub Secrets:**
     - Go to the "Settings" tab of your forked repository.
     - Click on "Secrets" in the left sidebar.
-    - Add the following secrets:
-        - `FLAIR_CLIENT_ID`
-        - `FLAIR_CLIENT_SECRET`
-        - `ICAL_URL`
-        - `AWAY_TEMP_C` (optional, default is 10)
-        - `OCCUPIED_TEMP_C` (optional, default is 18.34)
+    - Add the following secrets for each unit (e.g., `1`, `2`, etc.):
+        - `ICAL_URL.1`, `ICAL_URL.2`, ...
+        - `FLAIR_CLIENT_ID.1`, `FLAIR_CLIENT_ID.2`, ...
+        - `FLAIR_CLIENT_SECRET.1`, `FLAIR_CLIENT_SECRET.2`, ...
+        - `AWAY_TEMP_C.1`, `AWAY_TEMP_C.2` (optional, default is 10)
+        - `OCCUPIED_TEMP_C.1`, `OCCUPIED_TEMP_C.2` (optional, default is 18.34)
 
 3. **Run the script using GitHub Actions:**
-    - The script will run automatically based on the schedule defined in [daily-job.yml](http://_vscodecontentref_/6).
+    - Edit the matrix line for each batch of secrets (example is 2) [.github/workflows/daily-job.yml] and scheduling
+      timing, job will execute automatically daily. I've found [Crontab Guru](https://crontab.guru) useful for
+      generating your cron statement.
     - You can also trigger the workflow manually from the "Actions" tab in your GitHub repository.
 
 ## License

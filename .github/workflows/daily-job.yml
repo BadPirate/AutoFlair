@@ -8,6 +8,10 @@ on:
 jobs:
   run-autoflair:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        n: [1, 2] # Adjust range based on potential max secrets
+    continue-on-error: true # Continue if a set of secrets is not fully defined
 
     steps:
     - name: Checkout repository
@@ -35,15 +39,20 @@ jobs:
         conda list
         python --version
 
-    - name: Run AutoFlair script
+    - name: Check Secrets and Run AutoFlair Script
       env:
-        ICAL_URL: ${{ secrets.ICAL_URL || '' }} # AirBNB Calendar URL
-        FLAIR_CLIENT_ID: ${{ secrets.FLAIR_CLIENT_ID }} # oauth v1 client
-        FLAIR_CLIENT_SECRET: ${{ secrets.FLAIR_CLIENT_SECRET }} # oauth v1 secret
-        AWAY_TEMP_C: ${{ secrets.AWAY_TEMP_C }} # Optional, default 10C (50F)
-        OCCUPIED_TEMP_C: ${{ secrets.OCCUPIED_TEMP_C }}  # Optional, default 18.34C (65F)
+        ICAL_URL: ${{ secrets[format('ICAL_URL.{0}', matrix.n)] || '' }}
+        FLAIR_CLIENT_ID: ${{ secrets[format('FLAIR_CLIENT_ID.{0}', matrix.n)] || secrets.FLAIR_CLIENT_ID || '' }}
+        FLAIR_CLIENT_SECRET: ${{ secrets[format('FLAIR_CLIENT_SECRET.{0}', matrix.n)] || secrets.FLAIR_CLIENT_SECRET || '' }}
+        AWAY_TEMP_C: ${{ secrets[format('AWAY_TEMP_C.{0}', matrix.n)] || secrets.AWAY_TEMP_C || '' }}
+        OCCUPIED_TEMP_C: ${{ secrets[format('OCCUPIED_TEMP_C.{0}', matrix.n)] || secrets.OCCUPIED_TEMP_C || '' }}
       run: |
+        if [[ -z "$ICAL_URL" ]]; then
+          echo "ICAL_URL is not set for group ${{ matrix.n }}, skipping..."
+          exit 0
+        fi
         conda init bash
         source ~/.bashrc  # Reload the shell configuration
         conda activate calendar_heating
+        echo "Running AutoFlair for ICAL_URL group ${{ matrix.n }}"
         python AutoFlair.py
